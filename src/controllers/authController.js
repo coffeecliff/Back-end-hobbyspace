@@ -140,7 +140,7 @@ function me(req, res) { return res.json(safeUser(req.user)); }
 // PATCH /auth/me
 async function updateMe(req, res) {
   try {
-    const { name, bio, avatarBase64 } = req.body || {};
+    const { name, bio, avatarBase64, avatarUrl } = req.body || {};
     const user = req.user;
 
     if (name !== undefined) {
@@ -149,8 +149,12 @@ async function updateMe(req, res) {
       user.name = name.trim();
     }
     if (bio !== undefined) user.bio = bio;
-    if (avatarBase64) {
-      // Apaga avatar anterior
+    if (avatarUrl !== undefined) {
+      // URL já hospedada no Cloudinary — só salva no banco
+      if (user.avatarUrl && user.avatarUrl !== avatarUrl) await db.deleteImage(user.avatarUrl);
+      user.avatarUrl = avatarUrl;
+    } else if (avatarBase64) {
+      // Legado: base64 → faz upload no backend (pode falhar por restrição de host)
       if (user.avatarUrl) await db.deleteImage(user.avatarUrl);
       user.avatarUrl = await db.saveImage(avatarBase64, 'avatars');
     }

@@ -50,14 +50,18 @@ function getPost(req, res) {
 
 // POST /api/posts
 async function createPost(req, res) {
-  const { communitySlug, text, imageBase64 } = req.body || {};
+  const { communitySlug, text, imageBase64, imageUrl: imageUrlFromFrontend } = req.body || {};
   if (!communitySlug || !text?.trim())
     return res.status(400).json({ message: 'communitySlug e text são obrigatórios.' });
   if (!db.communities.find(c => c.slug === communitySlug))
     return res.status(404).json({ message: 'Comunidade não encontrada.' });
 
   let imageUrl = null;
-  if (imageBase64) {
+  if (imageUrlFromFrontend) {
+    // URL já hospedada no Cloudinary — só salva no banco
+    imageUrl = imageUrlFromFrontend;
+  } else if (imageBase64) {
+    // Legado: base64 → tenta upload no backend
     try {
       imageUrl = await db.saveImage(imageBase64, 'posts');
     } catch (err) {
