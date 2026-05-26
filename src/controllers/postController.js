@@ -56,6 +56,13 @@ async function createPost(req, res) {
   if (!db.communities.find(c => c.slug === communitySlug))
     return res.status(404).json({ message: 'Comunidade não encontrada.' });
 
+  // Só membros podem postar
+  const isMember = db.communityMembers.some(
+    m => m.userId === req.user.id && m.communitySlug === communitySlug
+  );
+  if (!isMember)
+    return res.status(403).json({ message: 'Entre na comunidade antes de postar.' });
+
   let imageUrl = null;
   if (imageUrlFromFrontend) {
     // URL já hospedada no Cloudinary — só salva no banco
