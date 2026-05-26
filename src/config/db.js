@@ -253,7 +253,10 @@ async function saveImage(base64Data, folder = 'posts') {
   const { buffer, ext } = parseImageBase64(base64Data);
   const fileName = `${uuidv4()}.${ext}`;
   fs.writeFileSync(path.join(IMAGES_DIR, fileName), buffer);
-  return `/images/${fileName}`;
+  // Retorna URL absoluta com a porta do backend para funcionar em web/mobile
+  const backendPort = process.env.PORT || 3000;
+  const backendHost = process.env.BACKEND_PUBLIC_URL || `http://localhost:${backendPort}`;
+  return `${backendHost}/images/${fileName}`;
 }
 
 async function deleteImage(urlPath) {
