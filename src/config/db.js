@@ -178,6 +178,51 @@ let _db    = null;
 let _ready = false;
 
 function normalizeDbShape(data) {
+  // Migração: corrige URLs de imagem antigas (todas eram de câmera fotográfica)
+  const CORRECT_IMAGES = {
+    fotografia: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=800&auto=format&fit=crop',
+    musica:     'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&auto=format&fit=crop',
+    culinaria:  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&auto=format&fit=crop',
+    leitura:    'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=800&auto=format&fit=crop',
+    desenho:    'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=800&auto=format&fit=crop',
+    jardinagem: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=800&auto=format&fit=crop',
+    yoga:       'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800&auto=format&fit=crop',
+    xadrez:     'https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=800&auto=format&fit=crop',
+    croche:     'https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=800&auto=format&fit=crop',
+    caligrafia: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&auto=format&fit=crop',
+    pintura:    'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=800&auto=format&fit=crop',
+    corrida:    'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=800&auto=format&fit=crop',
+  };
+  const CORRECT_BANNERS = {
+    fotografia: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=1200&auto=format&fit=crop',
+    musica:     'https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=1200&auto=format&fit=crop',
+    culinaria:  'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=1200&auto=format&fit=crop',
+    leitura:    'https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1200&auto=format&fit=crop',
+    desenho:    'https://images.unsplash.com/photo-1561154464-82e9adf32764?w=1200&auto=format&fit=crop',
+    jardinagem: 'https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?w=1200&auto=format&fit=crop',
+    yoga:       'https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=1200&auto=format&fit=crop',
+    xadrez:     'https://images.unsplash.com/photo-1529699211952-734e80c4d42b?w=1200&auto=format&fit=crop',
+    croche:     'https://images.unsplash.com/photo-1584992236310-6edddc08acff?w=1200&auto=format&fit=crop',
+    caligrafia: 'https://images.unsplash.com/photo-1455390582262-044cdead277a?w=1200&auto=format&fit=crop',
+    pintura:    'https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=1200&auto=format&fit=crop',
+    corrida:    'https://images.unsplash.com/photo-1530549387789-4c1017266635?w=1200&auto=format&fit=crop',
+  };
+  // MIGRATION: corrige imagens
+  if (data.communities) {
+    data.communities = data.communities.map(c => ({
+      ...c,
+      coverImageUrl: CORRECT_IMAGES[c.slug] || c.coverImageUrl,
+      banner: CORRECT_BANNERS[c.slug] || c.banner,
+    }));
+  }
+  if (data.hobbies) {
+    data.hobbies = data.hobbies.map(h => ({
+      ...h,
+      coverImageUrl: CORRECT_IMAGES[h.communitySlug] || h.coverImageUrl,
+      banner: CORRECT_BANNERS[h.communitySlug] || h.banner,
+    }));
+  }
+
   data.mlUserVectors       = data.mlUserVectors       || [];
   data.mlHobbyVectors      = data.mlHobbyVectors      || [];
   data.userHobbies         = data.userHobbies         || [];

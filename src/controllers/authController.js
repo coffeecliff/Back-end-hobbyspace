@@ -20,12 +20,19 @@ function makeTokens(userId) {
 function seedUserHobbies(userId) {
   const hobbies = db.hobbies;
   hobbies.slice(0, 3).forEach((h, i) => {
-    db.userHobbies.push({
-      id: uuidv4(), userId, hobbyId: h.id,
-      level: 'Iniciante', progressPercent: [10, 25, 5][i] ?? 0,
-      joinedAt: new Date().toISOString(),
-    });
-    h.membersCount += 1;
+    // Adiciona em userHobbies (legado)
+    if (!db.userHobbies.find(uh => uh.userId === userId && uh.hobbyId === h.id)) {
+      db.userHobbies.push({
+        id: uuidv4(), userId, hobbyId: h.id,
+        level: 'Novato', progressPercent: [10, 25, 5][i] ?? 0,
+        joinedAt: new Date().toISOString(),
+      });
+    }
+    // Adiciona em communityMembers (novo sistema)
+    if (!db.communityMembers.find(m => m.userId === userId && m.communitySlug === h.communitySlug)) {
+      db.communityMembers.push({ id: uuidv4(), userId, communitySlug: h.communitySlug, joinedAt: new Date().toISOString() });
+    }
+    h.membersCount = Math.max(h.membersCount, 0) + 1;
   });
   db.save();
   // Treina vetor ML inicial
