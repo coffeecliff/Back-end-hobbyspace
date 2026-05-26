@@ -1,0 +1,259 @@
+{
+  "hobbies": [
+    {
+      "id": "2b468de1-3b64-4447-bcbb-a7beb3f11151",
+      "name": "Música",
+      "communitySlug": "musica",
+      "membersCount": 4200,
+      "coverImageUrl": null
+    },
+    {
+      "id": "9b9ade68-95cd-42fa-9139-f773b792a89e",
+      "name": "Fotografia",
+      "communitySlug": "fotografia",
+      "membersCount": 3100,
+      "coverImageUrl": null
+    },
+    {
+      "id": "ccf734ab-75e0-4e63-8291-01c682acc410",
+      "name": "Culinária",
+      "communitySlug": "culinaria",
+      "membersCount": 5800,
+      "coverImageUrl": null
+    },
+    {
+      "id": "d7acc49f-2545-4a1c-99fa-89e7098c7f47",
+      "name": "Leitura",
+      "communitySlug": "leitura",
+      "membersCount": 6200,
+      "coverImageUrl": null
+    },
+    {
+      "id": "ce22e32e-2449-475e-b4f9-a296aef7c8ae",
+      "name": "Desenho",
+      "communitySlug": "desenho",
+      "membersCount": 2900,
+      "coverImageUrl": null
+    },
+    {
+      "id": "58d578f0-9464-4ac9-990b-c4b437da8850",
+      "name": "Jardinagem",
+      "communitySlug": "jardinagem",
+      "membersCount": 1800,
+      "coverImageUrl": null
+    },
+    {
+      "id": "5f8ac923-c275-4711-8f9c-9af40f47b0dc",
+      "name": "Yoga",
+      "communitySlug": "yoga",
+      "membersCount": 3400,
+      "coverImageUrl": null
+    },
+    {
+      "id": "bc646dc5-dba5-47c6-b05d-306eee23e22c",
+      "name": "Xadrez",
+      "communitySlug": "xadrez",
+      "membersCount": 1500,
+      "coverImageUrl": null
+    }
+  ],
+  "communities": [
+    {
+      "slug": "musica",
+      "title": "Música",
+      "membersCount": 4200,
+      "coverImageUrl": null
+    },
+    {
+      "slug": "fotografia",
+      "title": "Fotografia",
+      "membersCount": 3100,
+      "coverImageUrl": null
+    },
+    {
+      "slug": "culinaria",
+      "title": "Culinária",
+      "membersCount": 5800,
+      "coverImageUrl": null
+    },
+    {
+      "slug": "leitura",
+      "title": "Leitura",
+      "membersCount": 6200,
+      "coverImageUrl": null
+    },
+    {
+      "slug": "desenho",
+      "title": "Desenho",
+      "membersCount": 2900,
+      "coverImageUrl": null
+    },
+    {
+      "slug": "jardinagem",
+      "title": "Jardinagem",
+      "membersCount": 1800,
+      "coverImageUrl": null
+    },
+    {
+      "slug": "yoga",
+      "title": "Yoga",
+      "membersCount": 3400,
+      "coverImageUrl": null
+    },
+    {
+      "slug": "xadrez",
+      "title": "Xadrez",
+      "membersCount": 1500,
+      "coverImageUrl": null
+    }
+  ],
+  "users": [
+    {
+      "id": "system-seed-user",
+      "name": "HobbySpace",
+      "email": "system@hobbyspace.app",
+      "passwordHash": "",
+      "avatarUrl": null,
+      "bio": "Conta oficial da plataforma.",
+      "createdAt": "1970-01-01T00:00:00.000Z"
+    }
+  ],
+  "posts": [
+    {
+      "id": "dee3287e-e58e-4393-ad79-2b283d055461",
+      "userId": "system-seed-user",
+      "communitySlug": "musica",
+      "imageUrl": null,
+      "likesCount": 12,
+      "commentsCount": 2,
+      "savesCount": 2,
+      "createdAt": "2026-05-25T10:57:16.442Z",
+      "text": "Acabei de aprender a tocar minha primeira música no violão! 🎸 Qual foi a primeira de vocês?"
+    },
+    {
+      "id": "c9210232-befe-4356-8c75-f63e829b1641",
+      "userId": "system-seed-user",
+      "communitySlug": "fotografia",
+      "imageUrl": null,
+      "likesCount": 28,
+      "commentsCount": 1,
+      "savesCount": 5,
+      "createdAt": "2026-05-25T09:57:16.442Z",
+      "text": "Ensaio fotográfico no parque 📸 — luz natural é tudo!"
+    },
+    {
+      "id": "5749c7f4-123f-41e0-866d-807fb69a7574",
+      "userId": "system-seed-user",
+      "communitySlug": "culinaria",
+      "imageUrl": null,
+      "likesCount": 45,
+      "commentsCount": 2,
+      "savesCount": 9,
+      "createdAt": "2026-05-25T08:57:16.442Z",
+      "text": "Fiz um bolo de chocolate do zero. Ficou incrível! 🍫 Posso compartilhar a receita."
+    },
+    {
+      "id": "80f0aaa9-a304-43e7-a4e4-c31cdfd37df0",
+      "userId": "system-seed-user",
+      "communitySlug": "leitura",
+      "imageUrl": null,
+      "likesCount": 33,
+      "commentsCount": 2,
+      "savesCount": 14,
+      "createdAt": "2026-05-25T07:57:16.442Z",
+      "text": "\"O Senhor dos Anéis\" — uma aventura incrível! 📚 Qual livro marcou você?"
+    },
+    {
+      "id": "48387dd5-cabf-4ca6-a702-2129328ac33a",
+      "userId": "system-seed-user",
+      "communitySlug": "yoga",
+      "imageUrl": null,
+      "likesCount": 61,
+      "commentsCount": 2,
+      "savesCount": 18,
+      "createdAt": "2026-05-25T05:57:16.442Z",
+      "text": "Completei 30 dias seguidos de yoga! 🧘 Minha flexibilidade melhorou muito."
+    }
+  ],
+  "comments": [
+    {
+      "id": "0c8118b3-b344-49f8-b369-9fa1bed4e224",
+      "postId": "dee3287e-e58e-4393-ad79-2b283d055461",
+      "userId": "system-seed-user",
+      "text": "Parabéns! Qual música foi? 😊",
+      "likesCount": 3,
+      "createdAt": "2026-05-25T11:27:16.442Z"
+    },
+    {
+      "id": "9acb8d6b-956e-407d-892b-3b5effa4a730",
+      "postId": "dee3287e-e58e-4393-ad79-2b283d055461",
+      "userId": "system-seed-user",
+      "text": "Continue assim! É muito gratificante!",
+      "likesCount": 1,
+      "createdAt": "2026-05-25T11:42:16.442Z"
+    },
+    {
+      "id": "f8acbf0c-2f8d-4a8b-a517-631f82df61a8",
+      "postId": "c9210232-befe-4356-8c75-f63e829b1641",
+      "userId": "system-seed-user",
+      "text": "Que ângulo lindo! Qual câmera você usa?",
+      "likesCount": 5,
+      "createdAt": "2026-05-25T10:33:56.442Z"
+    },
+    {
+      "id": "b3cb7ea8-fd48-4907-9f9b-e67bd5b39263",
+      "postId": "5749c7f4-123f-41e0-866d-807fb69a7574",
+      "userId": "system-seed-user",
+      "text": "Manda a receita! 😍",
+      "likesCount": 7,
+      "createdAt": "2026-05-25T09:27:16.442Z"
+    },
+    {
+      "id": "86fb3360-36f5-4b9d-ba52-c9008be8464e",
+      "postId": "5749c7f4-123f-41e0-866d-807fb69a7574",
+      "userId": "system-seed-user",
+      "text": "Bolo de chocolate é sempre boa pedida!",
+      "likesCount": 3,
+      "createdAt": "2026-05-25T09:43:56.442Z"
+    },
+    {
+      "id": "a3b749c6-b10e-45d0-ba18-baaf7cb9168d",
+      "postId": "80f0aaa9-a304-43e7-a4e4-c31cdfd37df0",
+      "userId": "system-seed-user",
+      "text": "Clássico indispensável! 🙌",
+      "likesCount": 4,
+      "createdAt": "2026-05-25T08:20:36.442Z"
+    },
+    {
+      "id": "b92a5678-a7ab-40c0-9d45-b7222a478b2c",
+      "postId": "80f0aaa9-a304-43e7-a4e4-c31cdfd37df0",
+      "userId": "system-seed-user",
+      "text": "Prefiro começar com \"O Hobbit\"!",
+      "likesCount": 2,
+      "createdAt": "2026-05-25T08:37:16.442Z"
+    },
+    {
+      "id": "9c57161e-84b4-4345-989a-a68a21e10de3",
+      "postId": "48387dd5-cabf-4ca6-a702-2129328ac33a",
+      "userId": "system-seed-user",
+      "text": "Inspirador! Vou começar minha sequência! 🙏",
+      "likesCount": 8,
+      "createdAt": "2026-05-25T06:23:56.442Z"
+    },
+    {
+      "id": "81b1725c-6c01-4294-a9d9-d05b30105f0a",
+      "postId": "48387dd5-cabf-4ca6-a702-2129328ac33a",
+      "userId": "system-seed-user",
+      "text": "Parabéns pela persistência!",
+      "likesCount": 5,
+      "createdAt": "2026-05-25T06:40:36.442Z"
+    }
+  ],
+  "userHobbies": [],
+  "notifications": [],
+  "postLikes": [],
+  "postSaves": [],
+  "refreshTokens": [],
+  "mlUserVectors": [],
+  "mlHobbyVectors": []
+}

@@ -1,0 +1,16 @@
+{
+  "name": "hobbyspace-backend",
+  "version": "3.0.0",
+  "description": "HobbySpace Backend com ML, banco persistente e storage de imagens",
+  "main": "src/index.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "firebase-admin": "^13.10.0"
+  }
+}
