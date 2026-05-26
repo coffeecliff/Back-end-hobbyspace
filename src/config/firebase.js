@@ -1,4 +1,5 @@
-const admin = require('firebase-admin');
+let admin;
+try { admin = require('firebase-admin'); } catch (_) { admin = null; }
 
 function cleanPrivateKey(value) {
   if (!value) return value;
@@ -14,6 +15,7 @@ function hasServiceAccountEnv() {
 }
 
 function initFirebase() {
+  if (!admin) return null;
   if (admin.apps.length) return admin.app();
 
   if (hasServiceAccountEnv()) {
@@ -40,8 +42,8 @@ function initFirebase() {
 const app = initFirebase();
 const isFirebaseEnabled = Boolean(app);
 
-const firestore = isFirebaseEnabled ? admin.firestore() : null;
-const bucket = isFirebaseEnabled && process.env.FIREBASE_STORAGE_BUCKET
+const firestore = isFirebaseEnabled && admin ? admin.firestore() : null;
+const bucket = isFirebaseEnabled && admin && process.env.FIREBASE_STORAGE_BUCKET
   ? admin.storage().bucket()
   : null;
 
