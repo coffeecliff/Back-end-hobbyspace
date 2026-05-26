@@ -152,7 +152,7 @@ async function updateMe(req, res) {
     if (avatarBase64) {
       // Apaga avatar anterior
       if (user.avatarUrl) await db.deleteImage(user.avatarUrl);
-      user.avatarUrl = await db.saveImage(avatarBase64);
+      user.avatarUrl = await db.saveImage(avatarBase64, 'avatars');
     }
     db.save();
     return res.json(safeUser(user));
