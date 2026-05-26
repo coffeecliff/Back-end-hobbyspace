@@ -6,8 +6,7 @@
 const fs      = require('fs');
 const path    = require('path');
 const { uuidv4 } = require('../lib');
-const supabase    = require('./supabase');
-const firebase    = require('./firebase');
+const cloudinary  = require('./cloudinary');
 
 const DATA_DIR   = path.join(__dirname, '..', '..', 'data');
 const IMAGES_DIR = path.join(DATA_DIR, 'images');
@@ -230,7 +229,7 @@ function save() {
 async function init() {
   loadLocal();
   console.log(`[DB] Storage: ${USE_SUPABASE_DB ? 'Supabase REST' : 'JSON local'}`);
-  console.log(`[DB] Storage imagens: ${supabase.isEnabled ? 'Supabase Storage' : 'local'}`);
+  console.log(`[DB] Storage imagens: ${cloudinary.isEnabled ? 'Cloudinary' : 'local'}`);
 }
 
 // ── IMAGE STORAGE ──────────────────────────────────────────────────────────
@@ -245,19 +244,12 @@ function parseImageBase64(base64Data) {
   return { buffer: Buffer.from(base64Data, 'base64'), contentType: 'image/jpeg', ext: 'jpg' };
 }
 
-async function saveImage(base64Data, bucket = 'posts') {
-  if (supabase.isEnabled) {
-    try { return await supabase.saveImage(base64Data, bucket); }
-    catch (err) { console.error('[DB] Supabase storage falhou:', err.message); }
+async function saveImage(base64Data, folder = 'posts') {
+  // 1. Cloudinary
+  if (cloudinary.isEnabled) {
+    return await cloudinary.uploadImage(base64Data, folder);
   }
-  if (firebase.bucket) {
-    const { buffer, contentType, ext } = parseImageBase64(base64Data);
-    const fileName = `${uuidv4()}.${ext}`;
-    const file = firebase.bucket.file(`${bucket}/${fileName}`);
-    await file.save(buffer, { metadata: { contentType }, resumable: false });
-    const [url] = await file.getSignedUrl({ action: 'read', expires: '2491-03-09' });
-    return url;
-  }
+  // 2. Local (fallback — configure Cloudinary no .env para evitar)
   const { buffer, ext } = parseImageBase64(base64Data);
   const fileName = `${uuidv4()}.${ext}`;
   fs.writeFileSync(path.join(IMAGES_DIR, fileName), buffer);
@@ -267,13 +259,8 @@ async function saveImage(base64Data, bucket = 'posts') {
 async function deleteImage(urlPath) {
   if (!urlPath) return;
   try {
-    if (supabase.isEnabled && urlPath.includes('supabase')) {
-      const bucket = urlPath.includes('/avatars/') ? 'avatars' : 'posts';
-      await supabase.deleteFile(urlPath, bucket);
-    } else if (firebase.bucket && /^https?:\/\//.test(urlPath)) {
-      const parts = new URL(urlPath).pathname.split('/').filter(Boolean);
-      const idx = parts.indexOf('o');
-      if (idx >= 0) await firebase.bucket.file(decodeURIComponent(parts[idx+1])).delete({ ignoreNotFound: true });
+    if (urlPath.includes('cloudinary.com')) {
+      await cloudinary.deleteImage(urlPath);
     } else {
       const filePath = path.join(IMAGES_DIR, path.basename(urlPath));
       if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
@@ -290,7 +277,7 @@ const db = new Proxy({}, {
     if (key === 'deleteImage')       return deleteImage;
     if (key === 'SYSTEM_USER_ID')    return SYSTEM_USER_ID;
     if (key === 'IMAGES_DIR')        return IMAGES_DIR;
-    if (key === 'isStorageEnabled')  return supabase.isEnabled || !!firebase.bucket;
+    if (key === 'isStorageEnabled')  return cloudinary.isEnabled;
     return loadLocal()[key];
   },
   set(_, key, value) { loadLocal()[key] = value; save(); return true; },
